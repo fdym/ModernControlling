@@ -1,0 +1,43 @@
+#PARSE_ESCAPES
+gui.moderncontrolling_keybind.newKeybindScreenEntryButton=Keyboard...
+
+gui.moderncontrolling_keybind.control.title=Keybind Controls
+gui.moderncontrolling_keybind.control.name=Name
+gui.moderncontrolling_keybind.control.category=Category
+gui.moderncontrolling_keybind.control.key=Key
+gui.moderncontrolling_keybind.control.conflicts=This key is also used for:
+gui.moderncontrolling_keybind.control.conflictsFilterButton=%sShow Conflicts
+gui.moderncontrolling_keybind.control.unboundFilterButton=%sShow Unbound
+gui.moderncontrolling_keybind.control.syncFromKeybindings=Sync
+gui.moderncontrolling_keybind.control.syncFromKeybindings.tooltip=Sync from keybindings.
+gui.moderncontrolling_keybind.control.overrideKeybindings=Override
+gui.moderncontrolling_keybind.control.overrideKeybindings.tooltip=Override the keybindings.
+gui.moderncontrolling_keybind.control.rereadFileContent=Re-read File Content
+gui.moderncontrolling_keybind.control.rereadFileContent.short=Re-read
+gui.moderncontrolling_keybind.control.rereadFileContent.tooltip=Re-read the file content.\nThis is NOT "Reload File" button!
+gui.moderncontrolling_keybind.control.saveFileContent=Save File Content
+gui.moderncontrolling_keybind.control.saveFileContent.short=Save
+gui.moderncontrolling_keybind.control.saveFileContent.tooltip=Save the file content.
+
+gui.moderncontrolling_keybind.defaultSort.tooltip=Sort: Default
+gui.moderncontrolling_keybind.stringSort.tooltip=Sort: A to Z
+gui.moderncontrolling_keybind.stringReverseSort.tooltip=Sort: Z to A
+gui.moderncontrolling_keybind.keySort.tooltip=Sort: Key A to Z
+gui.moderncontrolling_keybind.keyReverseSort.tooltip=Sort: Key Z to A
+
+gui.moderncontrolling_keybind.config.reloadFile=Reload File
+gui.moderncontrolling_keybind.config.reloadFile.tooltip=Reload keybinding file. If the file does not exist, it will be created.\nYou should be pressed after changing the input bar\nor after modifying the keybindingsFilename in the configuration file.
+gui.moderncontrolling_keybind.config.tip1=Currently using: %s
+gui.moderncontrolling_keybind.config.tip2=If it does not match the content of the input bar, please click "Reload File".
+gui.moderncontrolling_keybind.config.disableKeybindingsFile=The keybindings file has been disabled. Click the wrench button to enable the keybindings file.
+
+gui.moderncontrolling_keybind.error.couldNotCreate=Could not create %s .
+gui.moderncontrolling_keybind.error.couldNotOpen=Could not open %s .
+gui.moderncontrolling_keybind.error.couldNotWrite=Could not write %s .
+gui.moderncontrolling_keybind.error.jsonSyntax=%s does not have the correct syntax.
+gui.moderncontrolling_keybind.error.jsonIO=JsonIOException occurred while reading %s .
+
+gui.moderncontrolling_keybind.continue=Do you want to continue?
+gui.moderncontrolling_keybind.syncWarning=This operation will cause the contents of the keybindings file being consistent with the keybinding settings.
+gui.moderncontrolling_keybind.overrideWarning=This operation will cause the keybinding settings being consistent with the contents of the keybindings file.
+gui.moderncontrolling_keybind.createFile=Type the name of the file:

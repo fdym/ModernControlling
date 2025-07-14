@@ -1,0 +1,31 @@
+[
+  {
+    "modid": "moderncontrolling_core",
+    "name": "Modern Controlling",
+    "description": "The foundation of Modern Controlling series.",
+    "version": "12.1.0",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["Fdym"],
+    "credits": "Fdym",
+    "logoFile": "assets/moderncontrolling_core/textures/logo.png",
+    "screenshots": [],
+    "dependencies": []
+  },
+  {
+    "modid": "moderncontrolling_keybind",
+    "name": "Modern Controlling Keybind",
+    "description": "Modify the content related to key binding.",
+    "version": "12.1.0",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["Fdym"],
+    "credits": "Fdym",
+    "logoFile": "assets/moderncontrolling_core/textures/logo.png",
+    "screenshots": [],
+    "requiredMods": ["moderncontrolling_core"],
+    "dependencies": ["moderncontrolling_core"]
+  }
+]

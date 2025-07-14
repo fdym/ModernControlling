@@ -1,0 +1,43 @@
+#PARSE_ESCAPES
+gui.moderncontrolling_keybind.newKeybindScreenEntryButton=键盘...
+
+gui.moderncontrolling_keybind.control.title=按键控制
+gui.moderncontrolling_keybind.control.name=名称
+gui.moderncontrolling_keybind.control.category=分类
+gui.moderncontrolling_keybind.control.key=键位
+gui.moderncontrolling_keybind.control.conflicts=该按键也用于：
+gui.moderncontrolling_keybind.control.conflictsFilterButton=%s显示冲突键位
+gui.moderncontrolling_keybind.control.unboundFilterButton=%s显示未绑定键位
+gui.moderncontrolling_keybind.control.syncFromKeybindings=同步
+gui.moderncontrolling_keybind.control.syncFromKeybindings.tooltip=从键位设置同步。
+gui.moderncontrolling_keybind.control.overrideKeybindings=覆盖
+gui.moderncontrolling_keybind.control.overrideKeybindings.tooltip=覆盖键位设置。
+gui.moderncontrolling_keybind.control.rereadFileContent=重新读取文件内容
+gui.moderncontrolling_keybind.control.rereadFileContent.short=重新读取
+gui.moderncontrolling_keybind.control.rereadFileContent.tooltip=重新读取文件内容。\n这不是“重载键位文件”按钮。
+gui.moderncontrolling_keybind.control.saveFileContent=保存文件内容
+gui.moderncontrolling_keybind.control.saveFileContent.short=保存
+gui.moderncontrolling_keybind.control.saveFileContent.tooltip=保存文件内容。
+
+gui.moderncontrolling_keybind.defaultSort.tooltip=排序：默认
+gui.moderncontrolling_keybind.stringSort.tooltip=排序：A至Z
+gui.moderncontrolling_keybind.stringReverseSort.tooltip=排序：Z至A
+gui.moderncontrolling_keybind.keySort.tooltip=排序：键位 A至Z
+gui.moderncontrolling_keybind.keyReverseSort.tooltip=排序：键位 Z至A
+
+gui.moderncontrolling_keybind.config.reloadFile=重载键位文件
+gui.moderncontrolling_keybind.config.reloadFile.tooltip=重载键位文件，如果文件不存在就创建。\n应在输入框内容改变后或在修改配置文件中\n的keybindingsFilename后按下。
+gui.moderncontrolling_keybind.config.tip1=现在正在使用：%s
+gui.moderncontrolling_keybind.config.tip2=如与input bar内容不符，请点击“重载键位文件”。
+gui.moderncontrolling_keybind.config.disableKeybindingsFile=键位文件已被禁用，点击扳手按钮来启用键位文件。
+
+gui.moderncontrolling_keybind.error.couldNotCreate=无法创建 %s 。
+gui.moderncontrolling_keybind.error.couldNotOpen=无法打开 %s 。
+gui.moderncontrolling_keybind.error.couldNotWrite=无法写入 %s 。
+gui.moderncontrolling_keybind.error.jsonSyntax=%s 的格式不正确。
+gui.moderncontrolling_keybind.error.jsonIO=在读取 %s 时发生了JsonIOException。
+
+gui.moderncontrolling_keybind.continue=你要继续吗？
+gui.moderncontrolling_keybind.syncWarning=该操作将导致键位文件会与键位设置的内容一致。
+gui.moderncontrolling_keybind.overrideWarning=该操作将导致键位设置会与键位文件的内容一致。
+gui.moderncontrolling_keybind.createFile=输入文件名：
