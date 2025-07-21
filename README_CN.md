@@ -2,9 +2,9 @@
 Modern Controlling 是一个改善原版控制的模组。<br>
 目前它可以：
 - 使用新的控制设置界面，类似于Mojang在21w37a所做的。(Core)
-- 一些`GuiScreen`和GUI组件供开发者使用。(Core)
-- 更好的键位绑定设置界面。<del>类似于Controlling。</del>(Keybind)
+- 更好的键位绑定设置界面。<del>类似于[Controlling](https://modrinth.com/mod/controlling)。</del>(Keybind)
 - 将你的键位绑定设置导出成文件（也可以导入）。(Keybind)
+- And more!
 
 这个模组是模块化的，可以根据需求来自行添加。
 - Core：其它模块的基础。

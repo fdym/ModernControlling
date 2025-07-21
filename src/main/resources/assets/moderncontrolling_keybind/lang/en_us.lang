@@ -31,13 +31,9 @@ gui.moderncontrolling_keybind.config.tip1=Currently using: %s
 gui.moderncontrolling_keybind.config.tip2=If it does not match the content of the input bar, please click "Reload File".
 gui.moderncontrolling_keybind.config.disableKeybindingsFile=The keybindings file has been disabled. Click the wrench button to enable the keybindings file.
 
-gui.moderncontrolling_keybind.error.couldNotCreate=Could not create %s .
-gui.moderncontrolling_keybind.error.couldNotOpen=Could not open %s .
-gui.moderncontrolling_keybind.error.couldNotWrite=Could not write %s .
-gui.moderncontrolling_keybind.error.jsonSyntax=%s does not have the correct syntax.
-gui.moderncontrolling_keybind.error.jsonIO=JsonIOException occurred while reading %s .
-
 gui.moderncontrolling_keybind.continue=Do you want to continue?
 gui.moderncontrolling_keybind.syncWarning=This operation will cause the contents of the keybindings file being consistent with the keybinding settings.
 gui.moderncontrolling_keybind.overrideWarning=This operation will cause the keybinding settings being consistent with the contents of the keybindings file.
 gui.moderncontrolling_keybind.createFile=Type the name of the file:
+
+setting.moderncontrolling_keybind.keybinding=Special Keybinding Settings

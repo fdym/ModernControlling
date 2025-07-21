@@ -1,0 +1,10 @@
+config.moderncontrolling_toolkit.general=Modern Controlling Toolkit 配置
+config.moderncontrolling_toolkit.general.ncKeyCodes=开启全键无冲的所有按键
+config.moderncontrolling_toolkit.general.ncKeyCodes.tooltip=当列表中的按键按下时, 所有绑定为这个按键的按键绑定都将激活。
+config.moderncontrolling_toolkit.general.enableAKiNC=启用"AKiNC"模式
+config.moderncontrolling_toolkit.general.enableAKiNC.tooltip=当任意按键按下时, 所有绑定为这个按键的按键绑定都将激活。 启用此项将覆盖“开启全键无冲的所有按键”的效果。
+config.moderncontrolling_toolkit.general.enableCloneKeybindings=启用克隆键位
+config.moderncontrolling_toolkit.general.enableCloneKeybindings.tooltip=让玩家可以为单个键位绑定多个按键。
+
+gui.moderncontrolling_toolkit.settings.createACloneKeybinding=创建克隆键位
+gui.moderncontrolling_toolkit.settings.removeACloneKeybinding=删除克隆键位

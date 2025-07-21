@@ -1,5 +1,6 @@
 package net.fdymcreep.moderncontrolling.keybind.client.event;
 
+import akka.japi.Pair;
 import net.fdymcreep.moderncontrolling.core.client.gui.screen.NewControlScreen;
 import net.fdymcreep.moderncontrolling.keybind.ControllingKeybind;
 import net.fdymcreep.moderncontrolling.keybind.client.gui.screen.NewKeybindScreen;
@@ -14,13 +15,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(modid = ControllingKeybind.MODID)
 public class KeybindClientEventHandler {
-    private GuiButton KeybindScreenEntryButton;
+    private final GuiButton KeybindScreenEntryButton;
+
+    public KeybindClientEventHandler() {
+        this.KeybindScreenEntryButton = new GuiButton(0, 0, 0, 150, 20, I18n.format("gui." + ControllingKeybind.MODID + ".newKeybindScreenEntryButton"));
+    }
 
     @SubscribeEvent
     public void onGuiPreInit(GuiScreenEvent.InitGuiEvent.Pre event) {
-        if ((event.getGui() instanceof NewControlScreen) && (!((NewControlScreen) event.getGui()).buttons.contains(KeybindScreenEntryButton))) {
-            this.KeybindScreenEntryButton = new GuiButton(0, 0, 0, 150, 20, I18n.format("gui." + ControllingKeybind.MODID + ".newKeybindScreenEntryButton"));
-            ((NewControlScreen) event.getGui()).buttons.add(this.KeybindScreenEntryButton);
+        if ((event.getGui() instanceof NewControlScreen) && (((NewControlScreen) event.getGui()).buttons.stream().noneMatch(pair -> pair.first().equals(this.KeybindScreenEntryButton)))) {
+            ((NewControlScreen) event.getGui()).buttons.add(
+                    new Pair<>(this.KeybindScreenEntryButton, 50)
+            );
         }
     }
 

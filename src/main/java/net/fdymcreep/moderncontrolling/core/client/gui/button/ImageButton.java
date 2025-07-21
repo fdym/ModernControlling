@@ -12,7 +12,7 @@ public class ImageButton extends GuiButton {
     public int v;
     public int tileWidth;
     public int tileHeigth;
-    public final ResourceLocation resourceLocation;
+    public ResourceLocation resourceLocation;
 
     public ImageButton(
             int buttonId,

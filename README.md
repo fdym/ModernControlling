@@ -2,9 +2,9 @@
 Modern Controlling is a mod to improve the control of vanilla.
 At present, it can:
 - Use a new control settings screen, similar to what Mojang did in 21w37a. (Core)
-- Some `GuiScreen` and GUI components are available for developers to use. (Core)
-- Better keybinding settings screen. <del>Similar to Controlling.</del> (Keybind)
+- Better keybinding settings screen. <del>Similar to [Controlling](https://modrinth.com/mod/controlling).</del> (Keybind)
 - Export your keybinding settings as a file (or import). (Keybind)
+- And more!
 
 This mod is modular and can be added as required.
 - Core: The foundation of other modules.

@@ -1,15 +1,22 @@
 package net.fdymcreep.moderncontrolling.keybind.client.gui.screen;
 
+import net.fdymcreep.moderncontrolling.core.ControllingCore;
 import net.fdymcreep.moderncontrolling.core.client.gui.button.ITooltipList;
 import net.fdymcreep.moderncontrolling.core.client.gui.button.ITooltipListEntry;
+import net.fdymcreep.moderncontrolling.core.client.gui.button.ImageButton;
 import net.fdymcreep.moderncontrolling.core.client.gui.button.TooltipButton;
+import net.fdymcreep.moderncontrolling.core.client.gui.screen.SettingsScreen;
 import net.fdymcreep.moderncontrolling.keybind.ControllingKeybind;
+import net.fdymcreep.moderncontrolling.keybind.compat.MoCKCompatCheck;
+import net.fdymcreep.moderncontrolling.keybind.compat.ToolkitCompat;
 import net.fdymcreep.moderncontrolling.keybind.util.KeybindingFilterHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiListExtended;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.fml.relauncher.Side;
@@ -18,14 +25,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class NewKeybindList extends GuiListExtended implements ITooltipList {
-    protected final NewKeybindScreen controlsScreen;
     protected final Minecraft mc;
     protected int maxListLabelWidth;
     public List<ITooltipListEntry> listEntries;
+    public final NewKeybindScreen controlsScreen;
 
     public NewKeybindList(NewKeybindScreen controls, Minecraft mcIn) {
         super(mcIn, controls.width + 45, controls.height, 63, controls.height - 32, 20);
@@ -35,6 +43,7 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
 
         List<KeyBinding> keyBindings = new ArrayList<>(Arrays.asList(controls.options.keyBindings));
         keyBindings = KeybindingFilterHelper.defaultSort(keyBindings);
+        if (MoCKCompatCheck.moCTCanCampat()) ToolkitCompat.insertCloneKeybindings(keyBindings);
         this.setListEntries(keyBindings, true);
     }
 
@@ -85,12 +94,12 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
 
     @Override
     protected int getScrollBarX() {
-        return super.getScrollBarX() + 35;
+        return super.getScrollBarX() + 55;
     }
 
     @Override
     public int getListWidth() {
-        return super.getListWidth() + 50;
+        return super.getListWidth() + 70;
     }
 
     public void drawForeground(int mouseXIn, int mouseYIn, float partialTicks) {
@@ -144,37 +153,61 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
 
     @SideOnly(Side.CLIENT)
     public class KeyEntry implements ITooltipListEntry {
-        protected final KeyBinding keybinding;
         protected final String keyDesc;
         protected final TooltipButton btnChangeKeyModifier;
         protected final TooltipButton btnChangeKeyBinding;
         protected final GuiButton btnReset;
+        protected ImageButton btnCreateCloneKeybinding; // toolkit compat
+        protected ImageButton btnRemoveCloneKeybinding; // toolkit compat
+        protected final ImageButton btnSettings;
         protected String tooltip;
+        public final KeyBinding keybinding;
+        public final NewKeybindList parentList;
 
         protected KeyEntry(@Nonnull KeyBinding keyBinding) {
             this.keybinding = keyBinding;
-            this.keyDesc = I18n.format(keyBinding.getKeyDescription());
-            this.btnChangeKeyModifier = new TooltipButton(1, 0, 0, 50, 20, "/");
+            this.parentList = NewKeybindList.this;
+            if (MoCKCompatCheck.moCTCanCampat()) {
+                this.keyDesc = ToolkitCompat.getKeyDesc(keyBinding);
+            } else {
+                this.keyDesc = I18n.format(keyBinding.getKeyDescription());
+            }
+            this.btnChangeKeyModifier = new TooltipButton(0, 0, 0, 50, 20, "/");
             this.btnChangeKeyBinding = new TooltipButton(0, 0, 0, 95, 20, I18n.format(keyBinding.getKeyDescription()));
             this.btnReset = new GuiButton(0, 0, 0, 50, 20, I18n.format("controls.reset"));
+            if (MoCKCompatCheck.moCTCanCampat()) {
+                this.btnCreateCloneKeybinding = new ImageButton(0, 0, 0, 20, 20, 40, 0, 40, 20, new ResourceLocation(ControllingCore.MODID, "textures/gui/widgets.png"));
+                this.btnRemoveCloneKeybinding = new ImageButton(0, 0, 0, 20, 20, 60, 0, 60, 20, new ResourceLocation(ControllingCore.MODID, "textures/gui/widgets.png"));
+            }
+            this.btnSettings = new ImageButton(0, 0, 0, 20, 20, 20, 0, 20, 20, new ResourceLocation(ControllingCore.MODID, "textures/gui/widgets.png"));
         }
+
 
         @Override
         public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected, float partialTicks) {
-            boolean flag = NewKeybindList.this.controlsScreen.buttonId == this.keybinding;
-            NewKeybindList.this.mc.fontRenderer.drawString(this.keyDesc, x + 10 - NewKeybindList.this.maxListLabelWidth, y + slotHeight / 2 - NewKeybindList.this.mc.fontRenderer.FONT_HEIGHT / 2, 16777215);
-            this.btnReset.x = x + 215;
-            this.btnReset.y = y;
-            this.btnReset.enabled = !this.keybinding.isSetToDefaultValue();
-            this.btnReset.drawButton(NewKeybindList.this.mc, mouseX, mouseY, partialTicks);
+            boolean flag = this.parentList.controlsScreen.buttonId == this.keybinding;
+            this.parentList.mc.fontRenderer.drawString(this.keyDesc, x + 10 - this.parentList.maxListLabelWidth, y + slotHeight / 2 - this.parentList.mc.fontRenderer.FONT_HEIGHT / 2, 16777215);
+            if (MoCKCompatCheck.moCTCanCampat() && ToolkitCompat.isClone(this.keybinding)) {
+                this.btnCreateCloneKeybinding.x = x + 215;
+                this.btnCreateCloneKeybinding.y = y;
+                this.btnCreateCloneKeybinding.drawButton(this.parentList.mc, mouseX, mouseY, partialTicks);
+                this.btnRemoveCloneKeybinding.x = x + 245;
+                this.btnRemoveCloneKeybinding.y = y;
+                this.btnRemoveCloneKeybinding.drawButton(this.parentList.mc, mouseX, mouseY, partialTicks);
+            } else {
+                this.btnReset.x = x + 215;
+                this.btnReset.y = y;
+                this.btnReset.enabled = !this.keybinding.isSetToDefaultValue();
+                this.btnReset.drawButton(this.parentList.mc, mouseX, mouseY, partialTicks);
+            }
 
             this.btnChangeKeyBinding.x = x + 110;
             this.btnChangeKeyBinding.y = y;
-            this.btnChangeKeyBinding.displayString = new KeyBinding("", this.keybinding.getKeyCode(), "").getDisplayName();
+            this.btnChangeKeyBinding.displayString = GameSettings.getKeyDisplayString(this.keybinding.getKeyCode());
             List<KeyBinding> conflictsKeybinding = new ArrayList<>();
             StringBuilder builder;
             if (this.keybinding.getKeyCode() != 0) {
-                for (KeyBinding keybinding : NewKeybindList.this.mc.gameSettings.keyBindings) {
+                for (KeyBinding keybinding : this.parentList.mc.gameSettings.keyBindings) {
                     if (keybinding != this.keybinding && keybinding.conflicts(this.keybinding)) {
                         conflictsKeybinding.add(keybinding);
                     }
@@ -198,7 +231,7 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
                 }
             }
             this.btnChangeKeyBinding.tooltipText = this.tooltip;
-            this.btnChangeKeyBinding.drawButton(NewKeybindList.this.mc, mouseX, mouseY, partialTicks);
+            this.btnChangeKeyBinding.drawButton(this.parentList.mc, mouseX, mouseY, partialTicks);
 
             this.btnChangeKeyModifier.x = x + 50;
             this.btnChangeKeyModifier.y = y;
@@ -207,20 +240,24 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
             this.btnChangeKeyModifier.displayString = builder.toString();
             this.btnChangeKeyModifier.tooltipText = tooltip;
             this.btnChangeKeyModifier.drawButton(mc, mouseX, mouseY, partialTicks);
+
+            this.btnSettings.x = x + 265;
+            this.btnSettings.y = y;
+            this.btnSettings.drawButton(mc, mouseX, mouseY, partialTicks);
         }
 
         @Override
         public boolean mousePressed(int slotIndex, int mouseX, int mouseY, int mouseEvent, int relativeX, int relativeY) {
-            if (this.btnChangeKeyBinding.mousePressed(NewKeybindList.this.mc, mouseX, mouseY)) {
-                NewKeybindList.this.controlsScreen.buttonId = this.keybinding;
+            if (this.btnChangeKeyBinding.mousePressed(this.parentList.mc, mouseX, mouseY)) {
+                this.parentList.controlsScreen.buttonId = this.keybinding;
                 return true;
-            } else if (this.btnReset.mousePressed(NewKeybindList.this.mc, mouseX, mouseY)) {
+            } else if (this.btnReset.mousePressed(this.parentList.mc, mouseX, mouseY)) {
                 this.keybinding.setToDefault();
-                NewKeybindList.this.mc.gameSettings.setOptionKeyBinding(this.keybinding, this.keybinding.getKeyCodeDefault());
+                this.parentList.mc.gameSettings.setOptionKeyBinding(this.keybinding, this.keybinding.getKeyCodeDefault());
                 KeyBinding.resetKeyBindingArrayAndHash();
                 return true;
-            } else if (this.btnChangeKeyModifier.mousePressed(NewKeybindList.this.mc, mouseX, mouseY)) {
-                KeyModifier nextModifier = keybinding.getKeyModifier();
+            } else if (this.btnChangeKeyModifier.mousePressed(this.parentList.mc, mouseX, mouseY)) {
+                KeyModifier nextModifier = this.keybinding.getKeyModifier();
                 switch (nextModifier) {
                     case CONTROL:
                         nextModifier = KeyModifier.ALT;
@@ -239,9 +276,35 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
                         this.btnChangeKeyModifier.displayString = "CTRL(CMD)+";
                         break;
                 }
-                keybinding.setKeyModifierAndCode(nextModifier, keybinding.getKeyCode());
+                this.keybinding.setKeyModifierAndCode(nextModifier, this.keybinding.getKeyCode());
                 KeyBinding.resetKeyBindingArrayAndHash();
                 return true;
+            } else if (this.btnSettings.mousePressed(this.parentList.mc, mouseX, mouseY)) {
+                if (MoCKCompatCheck.moCTCanCampat()) {
+                    this.parentList.mc.displayGuiScreen(new SettingsScreen(
+                            this.parentList.controlsScreen,
+                            this,
+                            ToolkitCompat.isClone(this.keybinding) ? "keybindingSetting.clone" : "keybindingSetting.general",
+                            Collections.singletonList(I18n.format(
+                                    "setting." + ControllingKeybind.MODID + ".keybinding"
+                            ))
+                    ));
+                }
+                return true;
+            } else if (MoCKCompatCheck.moCTCanCampat() && ToolkitCompat.isClone(this.keybinding)) {
+                if (btnCreateCloneKeybinding.mousePressed(this.parentList.mc, mouseX, mouseY)) {
+                    KeyBinding origin = ToolkitCompat.getOrigin(this.keybinding);
+                    ToolkitCompat.addCloneKeybinding(
+                            this.parentList.mc.gameSettings,
+                            ToolkitCompat.createNew(origin)
+                    );
+                    this.parentList.controlsScreen.search();
+                    return true;
+                } else if (btnRemoveCloneKeybinding.mousePressed(this.parentList.mc, mouseX, mouseY)) {
+                    ToolkitCompat.removeCloneKeybinding(this.parentList.mc.gameSettings, this.keybinding);
+                    this.parentList.controlsScreen.search();
+                }
+                return false;
             } else {
                 return false;
             }
