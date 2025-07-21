@@ -1,0 +1,5 @@
+12.1.1
+ - Add "Toolkit" module.
+ - When ANY key is pressed, all key bindings for this key can be activated. (Default disabled)
+12.1.0
+ - First version!

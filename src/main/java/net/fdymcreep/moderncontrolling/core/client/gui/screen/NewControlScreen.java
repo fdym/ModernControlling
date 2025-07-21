@@ -1,5 +1,6 @@
 package net.fdymcreep.moderncontrolling.core.client.gui.screen;
 
+import akka.japi.Pair;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
@@ -8,6 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
@@ -16,7 +18,7 @@ public class NewControlScreen extends GuiScreen {
     protected GuiScreen parent;
     protected GuiButton returnButton;
     public GameSettings options;
-    public List<GuiButton> buttons = new ArrayList<>();
+    public List<Pair<GuiButton, Integer>> buttons = new ArrayList<>();
 
     public NewControlScreen(GuiScreen parent, GameSettings options) {
         this.parent = parent;
@@ -37,10 +39,11 @@ public class NewControlScreen extends GuiScreen {
             i++;
         }
 
-        for (GuiButton button : this.buttons) {
-            button.x = this.width / 2 - 155 + i % 2 * 160;
-            button.y = 42 + 24 * (i >> 1);
-            this.buttonList.add(button);
+        buttons.sort(Comparator.comparing(Pair::second));
+        for (Pair<GuiButton, Integer> pair : this.buttons) {
+            pair.first().x = this.width / 2 - 155 + i % 2 * 160;
+            pair.first().y = 42 + 24 * (i >> 1);
+            this.buttonList.add(pair.first());
             i++;
         }
 
@@ -59,11 +62,15 @@ public class NewControlScreen extends GuiScreen {
     @Override
     protected void actionPerformed(@Nonnull GuiButton button) {
         if (button.equals(this.returnButton)) {
-            buttons.clear();
             mc.displayGuiScreen(parent);
         } else if (button.id < 100 && button instanceof GuiOptionButton) {
             this.options.setOptionValue(((GuiOptionButton)button).getOption(), 1);
             button.displayString = this.options.getKeyBinding(GameSettings.Options.byOrdinal(button.id));
         }
+    }
+
+    @Override
+    public void onGuiClosed() {
+        buttons.clear();
     }
 }

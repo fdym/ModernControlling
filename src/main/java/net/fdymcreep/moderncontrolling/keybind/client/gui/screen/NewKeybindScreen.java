@@ -2,6 +2,7 @@ package net.fdymcreep.moderncontrolling.keybind.client.gui.screen;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import net.fdymcreep.moderncontrolling.core.ControllingCore;
 import net.fdymcreep.moderncontrolling.core.client.gui.button.ImageButton;
 import net.fdymcreep.moderncontrolling.core.client.gui.button.RadioButton;
 import net.fdymcreep.moderncontrolling.core.client.gui.button.TooltipButton;
@@ -184,10 +185,10 @@ public class NewKeybindScreen extends GuiScreen {
         this.buttonList.add(this.conflictsFilterButton);
         this.unboundFilterButton = new TooltipButton(0, this.width / 2 - 180, 42, 20, 20, "/", I18n.format("gui." + MODID + ".control.unboundFilterButton", ""));
         this.buttonList.add(this.unboundFilterButton);
-        this.sortButton = new ImageButton(0, this.width / 2 - 205, 18, 20, 20, 0, 0, 20, 20, new ResourceLocation(MODID, "textures/gui/keybind_widget.png"));
+        this.sortButton = new ImageButton(0, this.width / 2 - 205, 18, 20, 20, 0, 0, 20, 20, new ResourceLocation(MODID, "textures/gui/widgets.png"));
         this.sortButtonHoverChecker = new HoverChecker(this.sortButton, 0);
         this.buttonList.add(this.sortButton);
-        this.configButton = new ImageButton(0, this.width - 20, 0, 20, 20, 120, 0, 20, 20, new ResourceLocation(MODID, "textures/gui/keybind_widget.png"));
+        this.configButton = new ImageButton(0, this.width - 20, 0, 20, 20, 20, 0, 20, 20, new ResourceLocation(ControllingCore.MODID, "textures/gui/widgets.png"));
         this.buttonList.add(this.configButton);
 
         this.syncFromKeybindingsButton = new TooltipButton(
@@ -244,7 +245,7 @@ public class NewKeybindScreen extends GuiScreen {
 
             KeyBinding.resetKeyBindingArrayAndHash();
         } else if (button.equals(configButton)) {
-            this.mc.displayGuiScreen(new MCKConfigScreen(this));
+            this.mc.displayGuiScreen(new MoCKConfigScreen(this));
         } else if (button.equals(this.syncFromKeybindingsButton)) {
             this.mc.displayGuiScreen(new GuiYesNo(
                     (result, id) -> {
@@ -274,7 +275,7 @@ public class NewKeybindScreen extends GuiScreen {
             try {
                 ControllingKeybind.keybindingsFile.rereadContent();
             } catch (IOException e) {
-                String s = I18n.format("gui." + MODID + ".error.couldNotOpen", new File(
+                String s = I18n.format("gui." + ControllingCore.MODID + ".error.couldNotOpen", new File(
                         new File(
                                 Minecraft.getMinecraft().mcDataDir,
                                 "keybindings"
@@ -289,7 +290,7 @@ public class NewKeybindScreen extends GuiScreen {
                     }
                 });
             } catch (JsonSyntaxException e) {
-                String s = I18n.format("gui." + MODID + ".error.jsonSyntax", new File(
+                String s = I18n.format("gui." + ControllingCore.MODID + ".error.jsonSyntax", new File(
                         new File(
                                 Minecraft.getMinecraft().mcDataDir,
                                 "keybindings"
@@ -304,7 +305,7 @@ public class NewKeybindScreen extends GuiScreen {
                     }
                 });
             } catch (JsonIOException e) {
-                String s = I18n.format("gui." + MODID + ".error.jsonIO", new File(
+                String s = I18n.format("gui." + ControllingCore.MODID + ".error.jsonIO", new File(
                         new File(
                                 Minecraft.getMinecraft().mcDataDir,
                                 "keybindings"
@@ -323,7 +324,7 @@ public class NewKeybindScreen extends GuiScreen {
             try {
                 ControllingKeybind.keybindingsFile.saveContent();
             } catch (IOException e) {
-                String s = I18n.format("gui." + MODID + ".error.couldNotWrite", new File(
+                String s = I18n.format("gui." + ControllingCore.MODID + ".error.couldNotWrite", new File(
                         new File(
                                 Minecraft.getMinecraft().mcDataDir,
                                 "keybindings"
@@ -355,7 +356,7 @@ public class NewKeybindScreen extends GuiScreen {
                     this.sortButton.u += 20;
                 }
             }
-            search();
+            this.search();
         }
     }
 

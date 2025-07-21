@@ -1,12 +1,12 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
-//        maven { url = "https://repo.spongepowered.org/maven" }
+        maven { url = "https://repo.spongepowered.org/maven" }
         mavenCentral()
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
-//        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
         
@@ -14,9 +14,9 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-//apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'org.spongepowered.mixin'
 
-version = '12.1.0'
+version = '12.1.1'
 group = 'net.fdymcreep.moderncontrolling' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "moderncontrolling"
 
@@ -81,7 +81,7 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-//    compile files('libs/!mixinbooter-9.4.jar')
+    compile files('libs/!mixinbooter-9.4.jar')
 
 }
 
@@ -89,10 +89,10 @@ dependencies {
 jar {
     manifest {
         attributes([
-//            "FMLCorePlugin": "net.fdymcreep.moderncontrolling.core.plugin.ControllingPlugin",
-//            "FMLCorePluginContainsFMLMod": true,
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
+            "FMLCorePlugin": "net.fdymcreep.moderncontrolling.core.plugin.MoCPlugin",
+            "FMLCorePluginContainsFMLMod": true,
         ])
     }
 }
@@ -116,6 +116,6 @@ publishing {
     }
 }
 
-//mixin {
-//    add sourceSets.main, "mixins.moderncontrolling_keybind.refmap.json"
-//}
+mixin {
+    add sourceSets.main, "mixins.moderncontrolling_toolkit.refmap.json"
+}

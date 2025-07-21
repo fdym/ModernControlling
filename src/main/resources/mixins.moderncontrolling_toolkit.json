@@ -1,0 +1,13 @@
+{
+  "minVersion": "0.7",
+  "package": "net.fdymcreep.moderncontrolling.toolkit.mixin",
+  "target": "@env(DEFAULT)",
+  "refmap": "mixins.moderncontrolling_toolkit.refmap.json",
+  "client": [
+    "KeyBindingMapMixin",
+    "KeyBindingMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

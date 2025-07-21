@@ -1,0 +1,7 @@
+gui.settings=设置
+
+gui.moderncontrolling_core.error.couldNotCreate=无法创建 %s 。
+gui.moderncontrolling_core.error.couldNotOpen=无法打开 %s 。
+gui.moderncontrolling_core.error.couldNotWrite=无法写入 %s 。
+gui.moderncontrolling_core.error.jsonSyntax=%s 的格式不正确。
+gui.moderncontrolling_core.error.jsonIO=在读取 %s 时发生了JsonIOException。
