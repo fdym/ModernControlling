@@ -2,6 +2,7 @@ package net.fdymcreep.moderncontrolling.keybind.client.gui.screen;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import net.fdymcreep.moderncontrolling.core.ControllingCore;
 import net.fdymcreep.moderncontrolling.core.client.gui.button.ImageButton;
 import net.fdymcreep.moderncontrolling.core.client.gui.button.TooltipButton;
 import net.fdymcreep.moderncontrolling.core.client.gui.screen.ErrorScreen;
@@ -28,7 +29,7 @@ import java.io.IOException;
 import static net.fdymcreep.moderncontrolling.keybind.ControllingKeybind.MODID;
 import static net.fdymcreep.moderncontrolling.keybind.ControllingKeybind.logger;
 
-public class MCKConfigScreen extends GuiScreen {
+public class MoCKConfigScreen extends GuiScreen {
     protected GuiScreen parent;
     protected GuiTextField filenameInputBar;
     protected ImageButton chooseFileButton;
@@ -39,7 +40,7 @@ public class MCKConfigScreen extends GuiScreen {
     protected TooltipButton rereadButton;
     protected TooltipButton saveButton;
 
-    public MCKConfigScreen(GuiScreen parent) {
+    public MoCKConfigScreen(GuiScreen parent) {
         this.parent = parent;
     }
 
@@ -51,7 +52,7 @@ public class MCKConfigScreen extends GuiScreen {
         this.filenameInputBar = new GuiTextField(0, this.fontRenderer, 19, 39, 179, 19);
         this.filenameInputBar.setMaxStringLength(50);
         this.filenameInputBar.setText(ControllingKeybindConfig.keybindingsFilename);
-        this.chooseFileButton = new ImageButton(0, 200, 40, 20, 20, 100, 0, 20, 20, new ResourceLocation(MODID, "textures/gui/keybind_widget.png"));
+        this.chooseFileButton = new ImageButton(0, 200, 40, 20, 20, 100, 0, 20, 20, new ResourceLocation(ControllingCore.MODID, "textures/gui/widgets.png"));
         this.reloadFileButton = new TooltipButton(
                 0, 20, 60, 100, 20,
                 I18n.format("gui." + MODID + ".config.reloadFile"),
@@ -137,7 +138,7 @@ public class MCKConfigScreen extends GuiScreen {
                     Minecraft.getMinecraft().displayGuiScreen(new ErrorScreen(this) {
                         @Override
                         public String getErrorMessage() {
-                            return I18n.format("gui." + MODID + ".error.couldNotCreate", dir.getPath());
+                            return I18n.format("gui." + ControllingCore.MODID + ".error.couldNotCreate", dir.getPath());
                         }
                     });
                     return;
@@ -244,7 +245,7 @@ public class MCKConfigScreen extends GuiScreen {
             try {
                 ControllingKeybind.keybindingsFile.rereadContent();
             } catch (IOException e) {
-                String s = I18n.format("gui." + MODID + ".error.couldNotOpen", new File(
+                String s = I18n.format("gui." + ControllingCore.MODID + ".error.couldNotOpen", new File(
                         new File(
                                 Minecraft.getMinecraft().mcDataDir,
                                 "keybindings"
@@ -259,7 +260,7 @@ public class MCKConfigScreen extends GuiScreen {
                     }
                 });
             } catch (JsonSyntaxException e) {
-                String s = I18n.format("gui." + MODID + ".error.jsonSyntax", new File(
+                String s = I18n.format("gui." + ControllingCore.MODID + ".error.jsonSyntax", new File(
                         new File(
                                 Minecraft.getMinecraft().mcDataDir,
                                 "keybindings"
@@ -274,7 +275,7 @@ public class MCKConfigScreen extends GuiScreen {
                     }
                 });
             } catch (JsonIOException e) {
-                String s = I18n.format("gui." + MODID + ".error.jsonIO", new File(
+                String s = I18n.format("gui." + ControllingCore.MODID + ".error.jsonIO", new File(
                         new File(
                                 Minecraft.getMinecraft().mcDataDir,
                                 "keybindings"
@@ -293,7 +294,7 @@ public class MCKConfigScreen extends GuiScreen {
             try {
                 ControllingKeybind.keybindingsFile.saveContent();
             } catch (IOException e) {
-                String s = I18n.format("gui." + MODID + ".error.couldNotWrite", new File(
+                String s = I18n.format("gui." + ControllingCore.MODID + ".error.couldNotWrite", new File(
                         new File(
                                 Minecraft.getMinecraft().mcDataDir,
                                 "keybindings"

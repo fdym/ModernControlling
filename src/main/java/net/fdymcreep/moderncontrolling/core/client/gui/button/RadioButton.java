@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class RadioButton extends GuiButton {
-    private String originButtonText;
     protected RadioButton.Group group;
     protected boolean pressedFlag = false;
     public final int index;
+    public final String originButtonText;
 
     public RadioButton(int buttonId, int x, int y, String buttonText, int index, RadioButton.Group group) {
         super(buttonId, x, y, (group.getIndex() == index ? "[X] " : "[ ] ") + buttonText);

@@ -31,13 +31,9 @@ gui.moderncontrolling_keybind.config.tip1=现在正在使用：%s
 gui.moderncontrolling_keybind.config.tip2=如与input bar内容不符，请点击“重载键位文件”。
 gui.moderncontrolling_keybind.config.disableKeybindingsFile=键位文件已被禁用，点击扳手按钮来启用键位文件。
 
-gui.moderncontrolling_keybind.error.couldNotCreate=无法创建 %s 。
-gui.moderncontrolling_keybind.error.couldNotOpen=无法打开 %s 。
-gui.moderncontrolling_keybind.error.couldNotWrite=无法写入 %s 。
-gui.moderncontrolling_keybind.error.jsonSyntax=%s 的格式不正确。
-gui.moderncontrolling_keybind.error.jsonIO=在读取 %s 时发生了JsonIOException。
-
 gui.moderncontrolling_keybind.continue=你要继续吗？
 gui.moderncontrolling_keybind.syncWarning=该操作将导致键位文件会与键位设置的内容一致。
 gui.moderncontrolling_keybind.overrideWarning=该操作将导致键位设置会与键位文件的内容一致。
 gui.moderncontrolling_keybind.createFile=输入文件名：
+
+setting.moderncontrolling_keybind.keybinding=特殊键位设置

@@ -1,6 +1,6 @@
 package net.fdymcreep.moderncontrolling.keybind;
 
-import net.fdymcreep.moderncontrolling.keybind.client.gui.screen.MCKConfigScreen;
+import net.fdymcreep.moderncontrolling.keybind.client.gui.screen.MoCKConfigScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
@@ -8,7 +8,7 @@ import net.minecraftforge.fml.client.IModGuiFactory;
 import java.util.Collections;
 import java.util.Set;
 
-public class ControllingKeybindGuiFactory implements IModGuiFactory {
+public class MoCKGuiFactory implements IModGuiFactory {
     @Override
     public void initialize(Minecraft mc) {}
 
@@ -19,7 +19,7 @@ public class ControllingKeybindGuiFactory implements IModGuiFactory {
 
     @Override
     public GuiScreen createConfigGui(GuiScreen parent) {
-        return new MCKConfigScreen(parent);
+        return new MoCKConfigScreen(parent);
     }
 
     @Override

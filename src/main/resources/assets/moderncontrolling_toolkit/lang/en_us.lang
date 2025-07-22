@@ -1,0 +1,10 @@
+config.moderncontrolling_toolkit.general=Modern Controlling Toolkit Config
+config.moderncontrolling_toolkit.general.enableNcKeys=Enable Non-conflict Keys
+config.moderncontrolling_toolkit.general.enableNcKeys.tooltip=Enable “Non-conflict key codes” and “Enable "AKiNC" mode”.
+config.moderncontrolling_toolkit.general.ncKeyCodes=Non-conflict key codes
+config.moderncontrolling_toolkit.general.ncKeyCodes.tooltip=When a key in the list is pressed, all key bindings for this key can be activated.
+config.moderncontrolling_toolkit.general.enableAKiNC=Enable "AKiNC" mode
+config.moderncontrolling_toolkit.general.enableAKiNC.tooltip=When ANY key is pressed, all key bindings for this key can be activated. Enabling this option will override the effect of 'Non conflict key codes'.
+
+gui.moderncontrolling_toolkit.settings.createACloneKeybinding=Create a Clone Keybinding
+gui.moderncontrolling_toolkit.settings.removeACloneKeybinding=Remove this Clone Keybinding

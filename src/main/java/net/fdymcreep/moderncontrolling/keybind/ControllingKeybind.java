@@ -2,6 +2,7 @@ package net.fdymcreep.moderncontrolling.keybind;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import net.fdymcreep.moderncontrolling.core.ControllingCore;
 import net.fdymcreep.moderncontrolling.keybind.client.event.KeybindClientEventHandler;
 import net.fdymcreep.moderncontrolling.keybind.util.KeybindingsFile;
 import net.minecraft.client.Minecraft;
@@ -22,12 +23,12 @@ import java.io.IOException;
         version = ControllingKeybind.VERSION,
         dependencies = "required-after-client:moderncontrolling_core",
         clientSideOnly = true,
-        guiFactory = "net.fdymcreep.moderncontrolling.keybind.ControllingKeybindGuiFactory"
+        guiFactory = "net.fdymcreep.moderncontrolling.keybind.MoCKGuiFactory"
 )
 public class ControllingKeybind {
     public static final String MODID = "moderncontrolling_keybind";
     public static final String NAME = "Modern Controlling Keybind";
-    public static final String VERSION = "12.1.0";
+    public static final String VERSION = "12.1.1";
 
     public static KeybindingsFile keybindingsFile;
     public static Logger logger;
@@ -38,7 +39,7 @@ public class ControllingKeybind {
         try {
             keybindingsFile = new KeybindingsFile(newName);
         } catch (IOException e) {
-            result[0] = "gui.moderncontrolling_keybind.error.couldNotOpen";
+            result[0] = "gui." + ControllingCore.MODID + ".error.couldNotOpen";
             result[1] = new File(
                     new File(
                             Minecraft.getMinecraft().mcDataDir,
@@ -50,7 +51,7 @@ public class ControllingKeybind {
             keybindingsFile = null;
             return result;
         } catch (JsonSyntaxException e) {
-            result[0] = "gui.moderncontrolling_keybind.error.jsonSyntax";
+            result[0] = "gui." + ControllingCore.MODID + ".error.jsonSyntax";
             result[1] = new File(
                     new File(
                             Minecraft.getMinecraft().mcDataDir,
@@ -62,7 +63,7 @@ public class ControllingKeybind {
             keybindingsFile = null;
             return result;
         } catch (JsonIOException e) {
-            result[0] = "gui.moderncontrolling_keybind.error.jsonIO";
+            result[0] = "gui." + ControllingCore.MODID + ".error.jsonIO";
             result[1] = new File(
                     new File(
                             Minecraft.getMinecraft().mcDataDir,

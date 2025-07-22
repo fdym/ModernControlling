@@ -1,0 +1,7 @@
+gui.settings=Settings
+
+gui.moderncontrolling_core.error.couldNotOpen=Could not open %s .
+gui.moderncontrolling_core.error.couldNotCreate=Could not create %s .
+gui.moderncontrolling_core.error.couldNotWrite=Could not write %s .
+gui.moderncontrolling_core.error.jsonSyntax=%s does not have the correct syntax.
+gui.moderncontrolling_core.error.jsonIO=JsonIOException occurred while reading %s .
