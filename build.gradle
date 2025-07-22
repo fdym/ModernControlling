@@ -16,7 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '12.1.1'
+version = '12.1.1.1'
 group = 'net.fdymcreep.moderncontrolling' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "moderncontrolling"
 

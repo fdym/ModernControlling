@@ -1,4 +1,5 @@
 gui.settings=Settings
+gui.keyboard.dot=Keyboard...
 
 gui.moderncontrolling_core.error.couldNotOpen=Could not open %s .
 gui.moderncontrolling_core.error.couldNotCreate=Could not create %s .

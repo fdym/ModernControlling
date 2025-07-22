@@ -1,4 +1,5 @@
 gui.settings=设置
+gui.keyboard.dot=键盘...
 
 gui.moderncontrolling_core.error.couldNotCreate=无法创建 %s 。
 gui.moderncontrolling_core.error.couldNotOpen=无法打开 %s 。

@@ -18,7 +18,7 @@ public class KeybindClientEventHandler {
     private final GuiButton KeybindScreenEntryButton;
 
     public KeybindClientEventHandler() {
-        this.KeybindScreenEntryButton = new GuiButton(0, 0, 0, 150, 20, I18n.format("gui." + ControllingKeybind.MODID + ".newKeybindScreenEntryButton"));
+        this.KeybindScreenEntryButton = new GuiButton(0, 0, 0, 150, 20, I18n.format("gui.keyboard.dot"));
     }
 
     @SubscribeEvent
