@@ -1,3 +1,5 @@
+12.1.1.1
+ - Fix "GuiControls (Keybinding settings screen of vanilla) cannot be opened using only Modern Controlling Core." (#2)
 12.1.1
  - Add "Toolkit" module.
  - When ANY key is pressed, all key bindings for this key can be activated. (Default disabled)

@@ -1,6 +1,4 @@
 #PARSE_ESCAPES
-gui.moderncontrolling_keybind.newKeybindScreenEntryButton=键盘...
-
 gui.moderncontrolling_keybind.control.title=按键控制
 gui.moderncontrolling_keybind.control.name=名称
 gui.moderncontrolling_keybind.control.category=分类

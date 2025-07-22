@@ -4,8 +4,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Random;
-
 @Mod(
         modid = ControllingToolkit.MODID,
         name = ControllingToolkit.NAME,
@@ -17,8 +15,7 @@ import java.util.Random;
 public class ControllingToolkit {
     public static final String MODID = "moderncontrolling_toolkit";
     public static final String NAME = "Modern Controlling Toolkit";
-    public static final String VERSION = "12.1.1";
-    public static final Random RANDOM = new Random();
+    public static final String VERSION = "12.1.1.1";
 
     public static Logger logger;
 

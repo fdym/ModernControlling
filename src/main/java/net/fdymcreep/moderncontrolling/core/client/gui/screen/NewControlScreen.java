@@ -1,6 +1,7 @@
 package net.fdymcreep.moderncontrolling.core.client.gui.screen;
 
 import akka.japi.Pair;
+import net.fdymcreep.moderncontrolling.core.compat.MoCoreCompatCheck;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;

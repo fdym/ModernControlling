@@ -1,6 +1,4 @@
 #PARSE_ESCAPES
-gui.moderncontrolling_keybind.newKeybindScreenEntryButton=Keyboard...
-
 gui.moderncontrolling_keybind.control.title=Keybind Controls
 gui.moderncontrolling_keybind.control.name=Name
 gui.moderncontrolling_keybind.control.category=Category
