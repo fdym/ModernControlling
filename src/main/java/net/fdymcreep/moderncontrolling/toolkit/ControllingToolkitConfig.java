@@ -20,14 +20,19 @@ public class ControllingToolkitConfig {
     }
 
     @Config.LangKey("config." + ControllingToolkit.MODID + ".general.enableNcKeys")
-    @Config.Comment("")
-    public static boolean enableNcKeys = false;
+    @Config.Comment("Enable \"nonConflictKeyCodes\" and \"enableAKiNC\".")
+    public static boolean enableNcKeys = true;
 
     @Config.LangKey("config." + ControllingToolkit.MODID + ".general.ncKeyCodes")
     @Config.Comment("When a key in the list is pressed, all key bindings for this key can be activated.")
     public static int[] nonConflictKeyCodes = new int[100];
 
     @Config.LangKey("config." + ControllingToolkit.MODID + ".general.enableAKiNC")
-    @Config.Comment("When ANY key is pressed, all key bindings for this key can be activated. Enabling this option will override the effect of \"Non conflict key codes\".")
-    public static boolean enableAKiNC = false;
+    @Config.Comment("When ANY key is pressed, all key bindings for this key can be activated. Enabling this option will override the effect of \"nonConflictKeyCodes\".")
+    public static boolean enableAKiNC = true;
+
+    @Config.LangKey("config." + ControllingToolkit.MODID + ".general.enableCloneKeys")
+    @Config.Comment("Enable binding multiple keys to a single keybinding.")
+    @Config.RequiresMcRestart
+    public static boolean enableCloneKeys = true;
 }

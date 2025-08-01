@@ -1,7 +1,7 @@
 package net.fdymcreep.moderncontrolling.toolkit;
 
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(
@@ -15,12 +15,6 @@ import org.apache.logging.log4j.Logger;
 public class ControllingToolkit {
     public static final String MODID = "moderncontrolling_toolkit";
     public static final String NAME = "Modern Controlling Toolkit";
-    public static final String VERSION = "12.1.1.1";
-
-    public static Logger logger;
-
-    @Mod.EventHandler
-    private void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
-    }
+    public static final String VERSION = "12.1.1.2-beta";
+    public static final Logger LOGGER = LogManager.getLogger(MODID);;
 }

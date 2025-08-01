@@ -7,6 +7,8 @@ import net.fdymcreep.moderncontrolling.core.client.gui.button.ImageButton;
 import net.fdymcreep.moderncontrolling.core.client.gui.button.TooltipButton;
 import net.fdymcreep.moderncontrolling.core.client.gui.screen.SettingsScreen;
 import net.fdymcreep.moderncontrolling.keybind.ControllingKeybind;
+import net.fdymcreep.moderncontrolling.keybind.compat.MoCKCompatCheck;
+import net.fdymcreep.moderncontrolling.keybind.compat.ToolkitCompat;
 import net.fdymcreep.moderncontrolling.keybind.util.KeybindingFilterHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -41,6 +43,8 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
 
         List<KeyBinding> keyBindings = new ArrayList<>(Arrays.asList(controls.options.keyBindings));
         keyBindings = KeybindingFilterHelper.defaultSort(keyBindings);
+        if (MoCKCompatCheck.moCTCanCompat()  && ToolkitCompat.enableCloneKeys())
+            keyBindings = ToolkitCompat.insertCloneKeys(keyBindings);
         this.setListEntries(keyBindings, true);
     }
 
@@ -76,7 +80,7 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
                 this.maxListLabelWidth = j;
             }
 
-            this.listEntries.add(i++, new KeyEntry(keybinding));
+            this.listEntries.add(i++, new KeybindingEntry(keybinding));
         }
     }
 
@@ -149,17 +153,19 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
     }
 
     @SideOnly(Side.CLIENT)
-    public class KeyEntry implements ITooltipListEntry {
+    public class KeybindingEntry implements ITooltipListEntry {
         protected final String keyDesc;
         protected final TooltipButton btnChangeKeyModifier;
         protected final TooltipButton btnChangeKeyBinding;
         protected final GuiButton btnReset;
         protected final ImageButton btnSettings;
+        protected ImageButton btnCreateNew;
+        protected ImageButton btnRemoveClonekey;
         protected String tooltip;
         public final KeyBinding keybinding;
         public final NewKeybindList parentList;
 
-        protected KeyEntry(@Nonnull KeyBinding keyBinding) {
+        protected KeybindingEntry(@Nonnull KeyBinding keyBinding) {
             this.keybinding = keyBinding;
             this.parentList = NewKeybindList.this;
             this.keyDesc = I18n.format(keyBinding.getKeyDescription());
@@ -167,14 +173,35 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
             this.btnChangeKeyBinding = new TooltipButton(0, 0, 0, 95, 20, I18n.format(keyBinding.getKeyDescription()));
             this.btnReset = new GuiButton(0, 0, 0, 50, 20, I18n.format("controls.reset"));
             this.btnSettings = new ImageButton(0, 0, 0, 20, 20, 20, 0, 20, 20, new ResourceLocation(ControllingCore.MODID, "textures/gui/widgets.png"));
+            if (MoCKCompatCheck.moCTCanCompat()
+                    && ToolkitCompat.enableCloneKeys()
+                    && ToolkitCompat.isClone(keyBinding)
+            ) {
+                this.btnCreateNew = new ImageButton(0, 0, 0, 20, 20, 40, 0, 20, 20, new ResourceLocation(ControllingCore.MODID, "textures/gui/widgets.png"));
+                this.btnRemoveClonekey = new ImageButton(0, 0, 0, 20, 20, 60, 0, 20, 20, new ResourceLocation(ControllingCore.MODID, "textures/gui/widgets.png"));
+            }
         }
-
 
         @Override
         public void drawEntry(int slotIndex, int x, int y, int listWidth, int slotHeight, int mouseX, int mouseY, boolean isSelected, float partialTicks) {
             boolean flag = this.parentList.controlsScreen.buttonId == this.keybinding;
             this.parentList.mc.fontRenderer.drawString(this.keyDesc, x + 10 - this.parentList.maxListLabelWidth, y + slotHeight / 2 - this.parentList.mc.fontRenderer.FONT_HEIGHT / 2, 16777215);
-            this.btnReset.x = x + 215;this.btnReset.y = y;this.btnReset.enabled = !this.keybinding.isSetToDefaultValue();this.btnReset.drawButton(this.parentList.mc, mouseX, mouseY, partialTicks);
+            if (MoCKCompatCheck.moCTCanCompat()
+                    && ToolkitCompat.enableCloneKeys()
+                    && ToolkitCompat.isClone(this.keybinding)
+            ) {
+                this.btnCreateNew.x = x + 215;
+                this.btnCreateNew.y = y;
+                this.btnCreateNew.drawButton(this.parentList.mc, mouseX, mouseY, partialTicks);
+                this.btnRemoveClonekey.x = x + 245;
+                this.btnRemoveClonekey.y = y;
+                this.btnRemoveClonekey.drawButton(this.parentList.mc, mouseX, mouseY, partialTicks);
+            } else  {
+                this.btnReset.x = x + 215;
+                this.btnReset.y = y;
+                this.btnReset.enabled = !this.keybinding.isSetToDefaultValue();
+                this.btnReset.drawButton(this.parentList.mc, mouseX, mouseY, partialTicks);
+            }
 
             this.btnChangeKeyBinding.x = x + 110;
             this.btnChangeKeyBinding.y = y;
@@ -228,18 +255,26 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
                 return true;
             } else if (this.btnReset.mousePressed(this.parentList.mc, mouseX, mouseY)) {
                 this.keybinding.setToDefault();
-                this.parentList.mc.gameSettings.setOptionKeyBinding(this.keybinding, this.keybinding.getKeyCodeDefault());
+                this.parentList.mc.gameSettings.saveOptions();
                 KeyBinding.resetKeyBindingArrayAndHash();
                 return true;
             } else if (this.btnChangeKeyModifier.mousePressed(this.parentList.mc, mouseX, mouseY)) {
                 KeyModifier nextModifier = this.keybinding.getKeyModifier();
                 switch (nextModifier) {
                     case CONTROL:
-                        nextModifier = KeyModifier.ALT;
+                        if (KeyModifier.ALT.matches(this.keybinding.getKeyCode())) {
+                            nextModifier = KeyModifier.SHIFT;
+                        } else {
+                            nextModifier = KeyModifier.ALT;
+                        }
                         this.btnChangeKeyModifier.displayString = "ALT(OPT)+";
                         break;
                     case ALT:
-                        nextModifier = KeyModifier.SHIFT;
+                        if (KeyModifier.SHIFT.matches(this.keybinding.getKeyCode())) {
+                            nextModifier = KeyModifier.NONE;
+                        } else {
+                            nextModifier = KeyModifier.SHIFT;
+                        }
                         this.btnChangeKeyModifier.displayString = "SHIFT+";
                         break;
                     case SHIFT:
@@ -247,7 +282,11 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
                         this.btnChangeKeyModifier.displayString = "/";
                         break;
                     default:
-                        nextModifier = KeyModifier.CONTROL;
+                        if (KeyModifier.CONTROL.matches(this.keybinding.getKeyCode())) {
+                            nextModifier = KeyModifier.ALT;
+                        } else {
+                            nextModifier = KeyModifier.CONTROL;
+                        }
                         this.btnChangeKeyModifier.displayString = "CTRL(CMD)+";
                         break;
                 }
@@ -258,11 +297,25 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
                 this.parentList.mc.displayGuiScreen(new SettingsScreen(
                         this.parentList.controlsScreen,
                         this,
-                "keybindingSetting",
+                        MoCKCompatCheck.moCTCanCompat() && ToolkitCompat.isClone(this.keybinding)
+                                ? "keybindingSetting.clone" : "keybindingSetting.normal",
                         Collections.singletonList(I18n.format(
                                 "setting." + ControllingKeybind.MODID + ".keybinding"
                         ))
                 ));
+                return true;
+            } else if (MoCKCompatCheck.moCTCanCompat() && ToolkitCompat.enableCloneKeys()) {
+                if (this.btnCreateNew.mousePressed(this.parentList.mc, mouseX, mouseY)) {
+                    ToolkitCompat.createCloneKey(ToolkitCompat.getOrigin(this.keybinding));
+                    float a = this.parentList.amountScrolled;
+                    this.parentList.controlsScreen.search();
+                    this.parentList.amountScrolled = a;
+                } else if (this.btnRemoveClonekey.mousePressed(this.parentList.mc, mouseX, mouseY)) {
+                    ToolkitCompat.removeCloneKey(ToolkitCompat.toWrapper(this.keybinding));
+                    float a = this.parentList.amountScrolled;
+                    this.parentList.controlsScreen.search();
+                    this.parentList.amountScrolled = a;
+                }
                 return true;
             } else {
                 return false;

@@ -4,8 +4,11 @@
   "target": "@env(DEFAULT)",
   "refmap": "mixins.moderncontrolling_toolkit.refmap.json",
   "client": [
+    "GameSettingsMixin",
     "KeyBindingMapMixin",
-    "KeyBindingMixin"
+    "KeyBindingMixin",
+    "MinecraftMixin",
+    "accessor.KeyBindingAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

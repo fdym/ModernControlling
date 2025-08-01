@@ -8,6 +8,8 @@ import net.fdymcreep.moderncontrolling.core.client.gui.button.RadioButton;
 import net.fdymcreep.moderncontrolling.core.client.gui.button.TooltipButton;
 import net.fdymcreep.moderncontrolling.core.client.gui.screen.ErrorScreen;
 import net.fdymcreep.moderncontrolling.keybind.ControllingKeybind;
+import net.fdymcreep.moderncontrolling.keybind.compat.MoCKCompatCheck;
+import net.fdymcreep.moderncontrolling.keybind.compat.ToolkitCompat;
 import net.fdymcreep.moderncontrolling.keybind.util.KeybindingFilterHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -98,6 +100,9 @@ public class NewKeybindScreen extends GuiScreen {
             keyBindings = KeybindingFilterHelper.unboundFilter(keyBindings);
             withCategory = false;
         }
+
+        if (MoCKCompatCheck.moCTCanCompat()  && ToolkitCompat.enableCloneKeys())
+            keyBindings = ToolkitCompat.insertCloneKeys(keyBindings);
 
         this.keyBindingList.setListEntries(keyBindings, withCategory);
     }
@@ -364,7 +369,7 @@ public class NewKeybindScreen extends GuiScreen {
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         if (this.buttonId != null) {
             this.buttonId.setKeyCode(-100 + mouseButton);
-            this.options.setOptionKeyBinding(this.buttonId, -100 + mouseButton);
+            this.options.saveOptions();
             this.buttonId = null;
             KeyBinding.resetKeyBindingArrayAndHash();
         } else if (mouseButton != 0 || !this.keyBindingList.mouseClicked(mouseX, mouseY, mouseButton)) {
@@ -385,13 +390,13 @@ public class NewKeybindScreen extends GuiScreen {
         if (this.buttonId != null) {
             if (keyCode == 1) {
                 this.buttonId.setKeyCode(0);
-                this.options.setOptionKeyBinding(this.buttonId, 0);
+                this.options.saveOptions();
             } else if (keyCode != 0) {
                 this.buttonId.setKeyCode(keyCode);
-                this.options.setOptionKeyBinding(this.buttonId, keyCode);
+                this.options.saveOptions();
             } else if (typedChar > 0) {
                 this.buttonId.setKeyCode(typedChar + 256);
-                this.options.setOptionKeyBinding(this.buttonId, typedChar + 256);
+                this.options.saveOptions();
             }
             this.time = Minecraft.getSystemTime();
             KeyBinding.resetKeyBindingArrayAndHash();

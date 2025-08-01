@@ -3,6 +3,7 @@ package net.fdymcreep.moderncontrolling.toolkit.mixin;
 import com.google.common.collect.Sets;
 import net.fdymcreep.moderncontrolling.toolkit.ControllingToolkitConfig;
 import net.fdymcreep.moderncontrolling.toolkit.api.IKeyBindingMap;
+import net.fdymcreep.moderncontrolling.toolkit.util.CloneKeybindingWrapper;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.IntHashMap;
 import net.minecraftforge.client.settings.KeyBindingMap;
@@ -10,6 +11,9 @@ import net.minecraftforge.client.settings.KeyModifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
@@ -54,5 +58,10 @@ public abstract class KeyBindingMapMixin implements IKeyBindingMap {
             if (binding.isActiveAndMatches(keyCode))
                 result.add(binding);
         return result;
+    }
+
+    @Inject(method = "addKey", at = @At("HEAD"), cancellable = true, remap = false)
+    public void inject$addKey(int keyCode, KeyBinding keyBinding, CallbackInfo ci) {
+        if (keyBinding instanceof CloneKeybindingWrapper) ci.cancel();
     }
 }

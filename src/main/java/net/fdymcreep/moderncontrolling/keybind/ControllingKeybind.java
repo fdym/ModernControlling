@@ -4,6 +4,9 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import net.fdymcreep.moderncontrolling.core.ControllingCore;
 import net.fdymcreep.moderncontrolling.keybind.client.event.KeybindClientEventHandler;
+import net.fdymcreep.moderncontrolling.keybind.compat.CloneKeybindingExtra;
+import net.fdymcreep.moderncontrolling.keybind.compat.MoCKCompatCheck;
+import net.fdymcreep.moderncontrolling.keybind.compat.PostRemoveHandler;
 import net.fdymcreep.moderncontrolling.keybind.util.KeybindingsFile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -28,7 +31,7 @@ import java.io.IOException;
 public class ControllingKeybind {
     public static final String MODID = "moderncontrolling_keybind";
     public static final String NAME = "Modern Controlling Keybind";
-    public static final String VERSION = "12.1.1.1";
+    public static final String VERSION = "12.1.1.2-beta";
 
     public static KeybindingsFile keybindingsFile;
     public static Logger logger;
@@ -82,11 +85,15 @@ public class ControllingKeybind {
     private void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         MinecraftForge.EVENT_BUS.register(new KeybindClientEventHandler());
+        if (MoCKCompatCheck.moCTCanCompat())
+            MinecraftForge.EVENT_BUS.register(new PostRemoveHandler());
     }
 
     @Mod.EventHandler
     private void postInit(FMLPostInitializationEvent event) {
         if (ControllingKeybindConfig.enableKeybindingsFile) {
+            if (MoCKCompatCheck.moCTCanCompat())
+                KeybindingsFile.extras.add(new CloneKeybindingExtra());
             reloadKeybindingsFile(ControllingKeybindConfig.keybindingsFilename);
         } else {
             keybindingsFile = null;
