@@ -304,7 +304,7 @@ public class NewKeybindList extends GuiListExtended implements ITooltipList {
                         ))
                 ));
                 return true;
-            } else if (MoCKCompatCheck.moCTCanCompat() && ToolkitCompat.enableCloneKeys()) {
+            } else if (MoCKCompatCheck.moCTCanCompat() && ToolkitCompat.enableCloneKeys() && ToolkitCompat.isClone(this.keybinding)) {
                 if (this.btnCreateNew.mousePressed(this.parentList.mc, mouseX, mouseY)) {
                     ToolkitCompat.createCloneKey(ToolkitCompat.getOrigin(this.keybinding));
                     float a = this.parentList.amountScrolled;

@@ -31,7 +31,7 @@ import java.io.IOException;
 public class ControllingKeybind {
     public static final String MODID = "moderncontrolling_keybind";
     public static final String NAME = "Modern Controlling Keybind";
-    public static final String VERSION = "12.1.1.2-beta";
+    public static final String VERSION = "12.1.1.3-beta";
 
     public static KeybindingsFile keybindingsFile;
     public static Logger logger;
