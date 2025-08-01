@@ -13,5 +13,6 @@ This mod is modular and can be added as required.
 - Toolkit: Some small functions.
 
 ## Note:
+- "Toolkit" depends on Mixin 0.7+ and MixinExtras 0.4.0+.<br>Suggest using MixinBooter 10.0+ to provide Mixin and MixinExtras.
 - It is recommended to turn on "Force Unicode Font" in language settings to better use this mod.
 - You ***CAN*** use this mod in your modpack.

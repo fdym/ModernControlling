@@ -1,7 +1,11 @@
+12.1.1.2-beta
+ - Now a single keybinding can bind multiple keys.
+ - The "Toolkit" module now requires Mixin 0.7 and MixinExtras 0.40.0+ (MixinBooter 10.0+ is recommended).
+ - A portion of the GUI for the 'Keybind' module is now compatible with the latest features of the 'Toolkit' module.
 12.1.1.1
  - Fix "GuiControls (Keybinding settings screen of vanilla) cannot be opened using only Modern Controlling Core." (#2)
 12.1.1
- - Add "Toolkit" module.
+ - Add "Toolkit" module (need Mixin 0.7+).
  - When ANY key is pressed, all key bindings for this key can be activated. (Default disabled)
 12.1.0
  - First version!

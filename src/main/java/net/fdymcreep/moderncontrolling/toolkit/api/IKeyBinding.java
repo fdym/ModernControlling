@@ -1,9 +1,14 @@
 package net.fdymcreep.moderncontrolling.toolkit.api;
 
-import net.minecraft.client.settings.KeyBinding;
+import net.fdymcreep.moderncontrolling.toolkit.util.CloneKeybinding;
+import net.fdymcreep.moderncontrolling.toolkit.util.CloneKeybindingWrapper;
 
-import javax.annotation.Nullable;
+import java.util.List;
 
 public interface IKeyBinding {
     void press();
+
+    List<CloneKeybinding> getClones();
+
+    List<CloneKeybindingWrapper> getCloneWrappers();
 }

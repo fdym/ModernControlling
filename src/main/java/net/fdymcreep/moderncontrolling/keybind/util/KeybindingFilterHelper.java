@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class KeybindingFilterHelper {
+    private KeybindingFilterHelper() {}
+
     public static List<KeyBinding> defaultSort(List<KeyBinding> origin) {
         List<KeyBinding> list = new ArrayList<>(origin);
         Collections.sort(list);

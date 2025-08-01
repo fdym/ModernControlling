@@ -9,14 +9,14 @@ buildscript {
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
-        
+
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '12.1.1.1'
+version = '12.1.1.2-beta'
 group = 'net.fdymcreep.moderncontrolling' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "moderncontrolling"
 
@@ -81,8 +81,7 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    compile files('libs/!mixinbooter-9.4.jar')
-
+    compile files('libs/!mixinbooter-10.6.jar')
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

@@ -13,5 +13,6 @@ Modern Controlling 是一个改善原版控制的模组。<br>
 - Toolkit：一些小功能。
 
 ## 注：
+- “Toolkit”依赖于Mixin 0.7+和MixinExtras 0.4.0+。<br>建议使用MixinBooter 10.0+来提供Mixin和MixinExtras。
 - 建议在语言设置中打开“强制使用Unicode字体”以更好地使用本模组。
 - 你***可以***在整合包内使用该模组。
